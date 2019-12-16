@@ -50,7 +50,7 @@ export default Input.extend({
          * @param {any} value 
          */
         onInput(value) {
-            console.log('Value', value)
+            // console.log('Value', value)
             if (this.isNotSame(value, this.LQElement)) {
                 if (!this.isOutputObject) {
                     this.setValue(value, true, true)
