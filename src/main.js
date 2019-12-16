@@ -11,11 +11,13 @@ import DatePicker from './components/DatePicker'
 import Rate from './components/Rate'
 import ColorPicker from './components/ColorPicker'
 import Select from './components/Select'
+import Transfer from './components/Transfer'
+import Slider from './components/Slider'
 
 export default {
     // The install method will be called with the Vue constructor as
     // the first argument, along with possible options
-    install (Vue, options) {
+    install(Vue) {
         Vue.component('lqel-input', Input)
         Vue.component('lqel-form', Form)
         Vue.component('lqel-input-number', Number)
@@ -29,5 +31,7 @@ export default {
         Vue.component('lqel-rate', Rate)
         Vue.component('lqel-color-picker', ColorPicker)
         Vue.component('lqel-select', Select)
+        Vue.component('lqel-transfer', Transfer)
+        Vue.component('lqel-slider', Slider)
     }
 }

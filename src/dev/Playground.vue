@@ -1,11 +1,5 @@
 <template>
-    <lqel-form
-        name="test_form"
-        :rules="rules"
-        ref="lqForm"
-        action="http://localhost:8080"
-        content-type="formdata"
-    >
+    <lqel-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
         <template v-slot="{model, submit}">
             {{model}}
             <lqel-input labelText="Hello" id="_text_field" type="password" :show-password="true">
@@ -71,19 +65,32 @@
                 placeholder="Select date and time"
             ></lqel-date-picker>
 
-            <lqel-select id="_select" 
-                :remote="true" 
-                action="https://api.github.com/users" 
+            <lqel-select
+                id="_select"
+                :remote="true"
+                action="https://api.github.com/users"
                 response-key="data"
                 :filterable="true"
                 multiple
-                :static-data="{since: 135}" 
+                :static-data="{since: 135}"
                 clearable
+                is-output-object
+                item-text="login"
+            />
+            <lqel-select
+                id="_select2"
+                labelText="Create New Item"
+                :filterable="true"
+                multiple
+                clearable
+                :options="[{id: 1, name: 'Select 1'}, {id: 2, name: 'Select 2'}]"
                 allow-create
                 is-output-object
-                item-text="login" 
+                item-text="name"
             />
-
+            <lqel-transfer filter-placeholder="State Abbreviations" id="_transfer" :data="data" />
+            <lqel-slider id="_slider" :step="10" show-stops />
+            <lqel-slider id="_slider2" show-input />
             <div class="block">
                 <span class="demonstration">Color for different levels</span>
                 <lqel-rate id="_rate" :colors="colors"></lqel-rate>
@@ -92,21 +99,44 @@
                 <span class="demonstration">With default value</span>
                 <lqel-color-picker id="color1"></lqel-color-picker>
             </div>
-            <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}" > Submit</el-button>
+            <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button>
         </template>
     </lqel-form>
 </template>
 <script>
 export default {
     data() {
+        const generateData = _ => {
+            const data = [];
+            const states = [
+                'California',
+                'Illinois',
+                'Maryland',
+                'Texas',
+                'Florida',
+                'Colorado',
+                'Connecticut '
+            ];
+            const initials = ['CA', 'IL', 'MD', 'TX', 'FL', 'CO', 'CT'];
+            states.forEach((city, index) => {
+                data.push({
+                    label: city,
+                    key: `_${index}`,
+                    initial: initials[index]
+                });
+            });
+            return data;
+        };
+
         return {
             radio: 1,
+            data: generateData(),
             colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
             rules: {
                 _text_field: {
                     presence: { allowEmpty: false }
                 },
-                _rate: { presence: { allowEmpty: false } },
+                _rate: { presence: { allowEmpty: false } }
             }
         };
     },
