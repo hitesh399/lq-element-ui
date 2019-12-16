@@ -10,7 +10,8 @@ export default Input.extend({
         }
     },
     props: {
-        remote: Boolean
+        remote: Boolean,
+        disabledValues: Array
     },
     methods: {
         defaultSelectProps() {
@@ -35,11 +36,14 @@ export default Input.extend({
         renderSlots(createElement, slots) {
             if (Object.keys(slots).length === 0) {
                 return this.finalItems.map(item => {
+                    const _val = this.$helper.isObject(item) ? item[this.itemValue] : item
+                    const _disabled = this.$helper.isObject(item) ? !!item.disabled : false
                     return this.$createElement('el-option', {
                         props: {
                             key: `${this.id}_item_${item[this.itemValue]}`,
                             label: this.$helper.isObject(item) ? item[this.itemText] : item,
-                            value: this.$helper.isObject(item) ? item[this.itemValue] : item
+                            value: _val,
+                            disabled: _disabled || (this.disabledValues && this.disabledValues.includes(_val))
                         }
                     })
                 })
