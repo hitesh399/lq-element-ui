@@ -4,7 +4,7 @@ export default Input.extend({
     name: 'lqel-switch',
     data() {
         return {
-            vuetifyTagName: 'el-switch'
+            tagName: 'el-switch'
         }
     },
     methods: {

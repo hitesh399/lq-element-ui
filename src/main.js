@@ -10,6 +10,7 @@ import TimeSelect from './components/TimeSelect'
 import DatePicker from './components/DatePicker'
 import Rate from './components/Rate'
 import ColorPicker from './components/ColorPicker'
+import Select from './components/Select'
 
 export default {
     // The install method will be called with the Vue constructor as
@@ -27,5 +28,6 @@ export default {
         Vue.component('lqel-date-picker', DatePicker)
         Vue.component('lqel-rate', Rate)
         Vue.component('lqel-color-picker', ColorPicker)
+        Vue.component('lqel-select', Select)
     }
 }

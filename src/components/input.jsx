@@ -1,11 +1,11 @@
 
-import LqVtextField from '../../node_modules/lq-vuetify/src/components/LqVTextField'
+import DirectInput from '../lq-form-element-maker/DirectInput'
 
-export default LqVtextField.extend({
+export default DirectInput.extend({
     name: 'lqel-text-field',
     data() {
         return {
-            vuetifyTagName: 'el-input',
+            tagName: 'el-input',
             internalValue: '',
             internalValueKey: false,
             isNeedToUpdateStore: true
@@ -14,7 +14,7 @@ export default LqVtextField.extend({
     render: function (createElement) {
 
         if (!this.hasAccess) return null
-        const i = LqVtextField.options.render.call(this, createElement);
+        const i = DirectInput.options.render.call(this, createElement);
 
         if (!this.insideFormItem) {
             return i
@@ -58,7 +58,6 @@ export default LqVtextField.extend({
                 disabled: this.isDisabled,
                 value: this.LQElement,
                 name: this.id,
-                muliple: this.muliple
             }
         },
         onChange(value) {
@@ -66,7 +65,7 @@ export default LqVtextField.extend({
             if (!this.touch) {
                 this.touchStatus(true);
             }
-            LqVtextField.options.methods.onChange.call(this, value);
+            DirectInput.options.methods.onChange.call(this, value);
         },
     }
 })

@@ -4,7 +4,7 @@ export default Input.extend({
     name: 'lqel-color-picker',
     data() {
         return {
-            vuetifyTagName: 'el-color-picker'
+            tagName: 'el-color-picker'
         }
     }
 })

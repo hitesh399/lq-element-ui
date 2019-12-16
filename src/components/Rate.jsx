@@ -4,7 +4,7 @@ export default Input.extend({
     name: 'lqel-rate',
     data() {
         return {
-            vuetifyTagName: 'el-rate'
+            tagName: 'el-rate'
         }
     },
     methods: {

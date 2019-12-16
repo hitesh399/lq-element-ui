@@ -4,7 +4,7 @@ export default Input.extend({
     name: 'lqel-date-picker',
     data() {
         return {
-            vuetifyTagName: 'el-date-picker',
+            tagName: 'el-date-picker',
         }
     }
 })

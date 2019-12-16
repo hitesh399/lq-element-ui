@@ -4,7 +4,7 @@ export default Input.extend({
     name: 'lqel-time-select',
     data() {
         return {
-            vuetifyTagName: 'el-time-select'
+            tagName: 'el-time-select'
         }
     }
 })

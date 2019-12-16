@@ -4,7 +4,7 @@ export default Input.extend({
     name: 'lqel-radio-group',
     data() {
         return {
-            vuetifyTagName: 'el-radio-group'
+            tagName: 'el-radio-group'
         }
     }
 })

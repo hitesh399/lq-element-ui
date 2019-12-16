@@ -4,7 +4,7 @@ export default Input.extend({
     name: 'lqel-checkbox-group',
     data() {
         return {
-            vuetifyTagName: 'el-checkbox-group',
+            tagName: 'el-checkbox-group',
             internalValue: []
         }
     },

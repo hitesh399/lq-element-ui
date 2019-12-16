@@ -71,6 +71,19 @@
                 placeholder="Select date and time"
             ></lqel-date-picker>
 
+            <lqel-select id="_select" 
+                :remote="true" 
+                action="https://api.github.com/users" 
+                response-key="data"
+                :filterable="true"
+                multiple
+                :static-data="{since: 135}" 
+                clearable
+                allow-create
+                is-output-object
+                item-text="login" 
+            />
+
             <div class="block">
                 <span class="demonstration">Color for different levels</span>
                 <lqel-rate id="_rate" :colors="colors"></lqel-rate>
