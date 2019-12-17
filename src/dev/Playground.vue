@@ -82,6 +82,7 @@
                 labelText="Create New Item"
                 :filterable="true"
                 multiple
+                :multiple-limit="2"
                 clearable
                 group-by="category_name"
                 :options="[{id: 1, name: 'Select 1', category_name: 'Test1'}, {id: 2, name: 'Select 2', category_name: 'Test1'}, {id: 3, name: 'Select 3', category_name: 'Test2'}, {id: 4, name: 'Select 4', disabled: true}]"
