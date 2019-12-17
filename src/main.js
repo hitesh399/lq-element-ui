@@ -13,11 +13,16 @@ import ColorPicker from './components/ColorPicker'
 import Select from './components/Select'
 import Transfer from './components/Transfer'
 import Slider from './components/Slider'
+import DataTable from './components/DataTable'
+import { lqOptions } from './defaultOptions'
+
 
 export default {
     // The install method will be called with the Vue constructor as
     // the first argument, along with possible options
-    install(Vue) {
+    install(Vue, options = {}) {
+        lqOptions.merge(options)
+
         Vue.component('lqel-input', Input)
         Vue.component('lqel-form', Form)
         Vue.component('lqel-input-number', Number)
@@ -33,5 +38,6 @@ export default {
         Vue.component('lqel-select', Select)
         Vue.component('lqel-transfer', Transfer)
         Vue.component('lqel-slider', Slider)
+        Vue.component('lqel-table', DataTable)
     }
 }
