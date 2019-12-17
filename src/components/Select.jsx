@@ -13,6 +13,24 @@ export default Input.extend({
         remote: Boolean,
         disabledValues: Array
     },
+    computed: {
+        /**
+         * Make grouped options
+         */
+        groupedOptions() {
+            const options = this.items;
+            let grouped_options = {};
+            options.map((opt) => {
+                let group_name = this.$helper.getProp(opt, this.groupBy);
+                group_name = group_name ? group_name : this.uncategorisedLabel;
+                if (!grouped_options[group_name]) {
+                    grouped_options[group_name] = [];
+                }
+                grouped_options[group_name].push(opt);
+            });
+            return grouped_options
+        }
+    },
     methods: {
         defaultSelectProps() {
             return {
@@ -34,21 +52,35 @@ export default Input.extend({
          * @param {Object} slots 
          */
         renderSlots(createElement, slots) {
-            if (Object.keys(slots).length === 0) {
-                return this.finalItems.map(item => {
-                    const _val = this.$helper.isObject(item) ? item[this.itemValue] : item
-                    const _disabled = this.$helper.isObject(item) ? !!item.disabled : false
-                    return this.$createElement('el-option', {
+            return this.groupBy ? this.renderOptionsWithGroup() : this.renderOptions(this.finalItems)
+        },
+        renderOptions(items) {
+            return items.map(item => {
+                const _val = this.$helper.isObject(item) ? item[this.itemValue] : item
+                const _disabled = this.$helper.isObject(item) ? !!item.disabled : false
+                const __disabled = _disabled || (this.disabledValues && this.disabledValues.includes(_val))
+                return this.$scopedSlots.item ? this.$scopedSlots.item({item, disabled: __disabled}) :
+                    this.$createElement('el-option', {
                         props: {
                             key: `${this.id}_item_${item[this.itemValue]}`,
                             label: this.$helper.isObject(item) ? item[this.itemText] : item,
                             value: _val,
-                            disabled: _disabled || (this.disabledValues && this.disabledValues.includes(_val))
+                            disabled: __disabled
                         }
                     })
-                })
-            }
-            return this._makeSlotReadyToRender(createElement, slots);
+            })
+        },
+        renderOptionsWithGroup() {
+            return this.groups.map(group => {
+                const items = this.groupedOptions[group]
+                return this.$scopedSlots.groupItem ? this.$scopedSlots.groupItem({group, items}) : 
+                    this.$createElement('el-option-group', {
+                        props: {
+                            key: group,
+                            label: group
+                        }
+                    }, this.renderOptions(items))
+            })
         },
         /**
         * When value change internally.
@@ -60,7 +92,7 @@ export default Input.extend({
                 let items = [];
                 _values.forEach((val) => {
                     let _selected_item = val
-                    this.finalItems.every(_item => {
+                    this.items.every(_item => {
                         if (_item[this.itemValue] === val) {
                             _selected_item = _item
                             return false

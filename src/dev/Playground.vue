@@ -83,11 +83,16 @@
                 :filterable="true"
                 multiple
                 clearable
-                :options="[{id: 1, name: 'Select 1'}, {id: 2, name: 'Select 2'}]"
+                group-by="category_name"
+                :options="[{id: 1, name: 'Select 1', category_name: 'Test1'}, {id: 2, name: 'Select 2', category_name: 'Test1'}, {id: 3, name: 'Select 3', category_name: 'Test2'}, {id: 4, name: 'Select 4', disabled: true}]"
                 allow-create
                 is-output-object
                 item-text="name"
-            />
+            >
+            <template v-slot:item="{item, disabled}">
+                <el-option :value="item.name" :disabled="disabled" />
+            </template>
+        </lqel-select>
             <lqel-transfer filter-placeholder="State Abbreviations" id="_transfer" :data="data" />
             <lqel-slider id="_slider" :step="10" show-stops />
             <lqel-slider id="_slider2" show-input />

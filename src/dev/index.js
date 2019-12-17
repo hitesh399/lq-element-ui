@@ -13,6 +13,8 @@ import lqElementUi from '../main'
 import helper from 'vuejs-object-helper'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/en'
+
 
 Object.defineProperty(
     Vue.prototype, 
@@ -24,7 +26,7 @@ Object.defineProperty(
 Vue.use(VueCroppie)
 Vue.use(lqForm, { store })
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, {locale});
 
 Vue.config.performance = false
 
