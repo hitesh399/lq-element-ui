@@ -21,11 +21,12 @@ export default Vue.extend({
             type: String,
             default: () => 'GET'
         },
-        defaultSortBy: String,
-        defaultSortOrder: {
-            type: String,
-            default: () => 'asc'
-        },
+        // defaultSortBy: String,
+        // defaultSortOrder: {
+        //     type: String,
+        //     default: () => 'asc'
+        // },
+        defaultSort: Object,
         keepAlive: {
             type: Boolean,
             default: () => lqOptions.keepAlive
@@ -76,20 +77,14 @@ export default Vue.extend({
     },
     created() {
         if (!this.sortBy) {
-            if (this.defaultSortBy) {
-                this.$lqForm.setElementVal(this.tableName, 'sort_by', { [this.defaultSortBy]: this.defaultSortOrder })
-                this.$nextTick(() => {
-                    this.$refs.elTable.sort(this.defaultSortBy, this.defaultSortOrder === 'asc' ? 'ascending' : 'descending' )
-                })
+            if (this.defaultSort) {
+                const {prop, order} = this.defaultSort
+                if (order) {
+                    this.$lqForm.setElementVal(this.tableName, 'sort_by', {
+                        [prop]: order === 'ascending' ? 'asc' : 'desc'
+                    })
+                }
             }
-        } else {
-
-            this.$nextTick(() => {
-                const sortByKeys = Object.keys(this.sortBy);
-                sortByKeys.forEach((_key) => {
-                    this.$refs.elTable.sort(_key, this.sortBy[_key] === 'asc' ? 'ascending' : 'descending')
-                })                
-            })
         }
     },
     render: function () {
@@ -99,33 +94,27 @@ export default Vue.extend({
         this.isLoaded = true
     },
     computed: {
-        // currentPage: function () {
-        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'page'], 1);
-        // },
-        // pageSize: function () {
-        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'page_size'], 15);
-        // },
-        // sortBy: function () {
-        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'sort_by'], null);
-        // },
-        // descending: function () {
-        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'descending'], false);
-        // },
-        // total: function () {
-        //     return this.$helper.getProp(this.$store.state, ['table', this.tableName, 'settings', 'total'], 0);
-        // },
-        // requesting: function () {
-        //     return this.$helper.getProp(this.$store.state, ['table', this.tableName, 'requesting'], false);
-        // },
-        // selectedKeys: function () {
-        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'selected'], []);
-        // }
+        sortBy: function () {
+            return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'sort_by'], null);
+        },
+        sortObjectForElement() {
+            let sort = []
+           if (this.sortBy) {
+               const keys = Object.keys(this.sortBy)
+               keys.forEach(prop => {
+                    sort.push({
+                        prop,
+                        order: this.sortBy[prop] === 'desc' ? 'descending' : 'ascending'
+                    })
+               })
+           }
+           return sort.length ? sort[0]: undefined
+        }
     },
     methods: {
+
         getDataTable(scope) {
             const self = this;
-            // const header = this.$scopedSlots.header;
-            // console.log('scope.items', scope.items)
             return this.$createElement(
                 'el-table',
                 {
@@ -154,6 +143,7 @@ export default Vue.extend({
                     props: {
                         ...this.$attrs,
                         data: scope.items,
+                        defaultSort: this.sortObjectForElement,
                         loading: scope.requesting,
                         disablePagination: scope.requesting,
                         totalItems: scope.total,

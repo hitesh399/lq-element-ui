@@ -109,7 +109,11 @@
                 <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button>
             </template>
         </lqel-form>
-        <lqel-table action="https://jsonplaceholder.typicode.com/posts" tableName="_test_table" dataKey="data" defaultSortBy="id">
+        <lqel-table action="https://jsonplaceholder.typicode.com/posts" 
+            tableName="_test_table"
+            dataKey="data" 
+            :default-sort = "{prop: 'id', order: 'descending'}"
+            >
             <el-table-column
               type="selection"
               width="55">
@@ -117,12 +121,12 @@
             <el-table-column
                 prop="title"
                 label="Title"
-                sortable
+                sortable="custom"
                 width="180">
               </el-table-column>
               <el-table-column
                 prop="id"
-                sortable
+                sortable="custom"
                 label="id"
                 width="180">
               </el-table-column>
