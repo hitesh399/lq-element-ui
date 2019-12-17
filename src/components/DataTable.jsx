@@ -99,36 +99,27 @@ export default Vue.extend({
         this.isLoaded = true
     },
     computed: {
-        currentPage: function () {
-            return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'page'], 1);
-        },
-        pageSize: function () {
-            return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'page_size'], 15);
-        },
-        sortBy: function () {
-            return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'sort_by'], null);
-        },
-        descending: function () {
-            return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'descending'], false);
-        },
-        total: function () {
-            return this.$helper.getProp(this.$store.state, ['table', this.tableName, 'settings', 'total'], 0);
-        },
-        requesting: function () {
-            return this.$helper.getProp(this.$store.state, ['table', this.tableName, 'requesting'], false);
-        },
-        selectedKeys: function () {
-            return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'selected'], []);
-        },
-        pagination: function () {
-            return {
-                page: this.currentPage,
-                rowsPerPage: this.pageSize,
-                totalItems: this.total,
-                descending: this.descending,
-                sortBy: this.sortBy
-            }
-        }
+        // currentPage: function () {
+        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'page'], 1);
+        // },
+        // pageSize: function () {
+        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'page_size'], 15);
+        // },
+        // sortBy: function () {
+        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'sort_by'], null);
+        // },
+        // descending: function () {
+        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'descending'], false);
+        // },
+        // total: function () {
+        //     return this.$helper.getProp(this.$store.state, ['table', this.tableName, 'settings', 'total'], 0);
+        // },
+        // requesting: function () {
+        //     return this.$helper.getProp(this.$store.state, ['table', this.tableName, 'requesting'], false);
+        // },
+        // selectedKeys: function () {
+        //     return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'selected'], []);
+        // }
     },
     methods: {
         getDataTable(scope) {
