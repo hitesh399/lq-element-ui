@@ -5,15 +5,30 @@ const lqOptions = {
         pageSize: 30,
         keepSelected: true,
         autoFilter: true,
+        dataKey: 'data.data',
         keepSelectedOnPageChange: true,
         keepAlive: true,
         loadingText: 'Fetching...',
         noDataText: 'No data available',
         noResultsText: 'No matching records found',
-        can: null
+        ascStr: 'ascending',
+        descStr: 'descending',
+        pageKey: 'page'
     },
     get rowsPerPageItems() {
         return this.options.rowsPerPageItems
+    },
+    get ascStr() {
+        return this.options.ascStr
+    },
+    get pageKey() {
+        return this.options.pageKey
+    },
+    get dataKey() {
+        return this.options.ascStr
+    },
+    get descStr() {
+        return this.options.descStr
     },
     get itemKey() {
         return this.options.itemKey
@@ -41,9 +56,6 @@ const lqOptions = {
     },
     get noResultsText() {
         return this.options.noResultsText
-    },
-    get can () {
-        return this.options.can
     },
     merge: function (options) {
         this.options = {

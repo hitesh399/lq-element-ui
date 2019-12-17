@@ -13,7 +13,8 @@ import ColorPicker from './components/ColorPicker'
 import Select from './components/Select'
 import Transfer from './components/Transfer'
 import Slider from './components/Slider'
-import DataTable from './components/DataTable'
+import Table from './components/Table'
+import Pagination from './components/Pagination'
 import { lqOptions } from './defaultOptions'
 
 
@@ -38,6 +39,7 @@ export default {
         Vue.component('lqel-select', Select)
         Vue.component('lqel-transfer', Transfer)
         Vue.component('lqel-slider', Slider)
-        Vue.component('lqel-table', DataTable)
+        Vue.component('lqel-table', Table)
+        Vue.component('lqel-pagination', Pagination)
     }
 }

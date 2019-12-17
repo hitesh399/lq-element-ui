@@ -1,9 +1,14 @@
 <template>
     <div>
-        <lqel-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
+        <!-- <lqel-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
             <template v-slot="{model, submit}">
                 {{model}}
-                <lqel-input labelText="Hello" id="_text_field" type="password" :show-password="true">
+                <lqel-input
+                    labelText="Hello"
+                    id="_text_field"
+                    type="password"
+                    :show-password="true"
+                >
                     <template v-slot:label>I am Label</template>
                 </lqel-input>
                 <lqel-input-number id="_number" @change="handleChangeNumber" :min="1" :max="10"></lqel-input-number>Group Radio Button
@@ -21,7 +26,12 @@
                     <el-checkbox label="disabled"></el-checkbox>
                     <el-checkbox label="selected and disabled"></el-checkbox>
                 </lqel-checkbox-group>Single Checkbox
-                <lqel-checkbox id="_single_checkbox" :true-label="1" :false-label="0" label="Option1" />Switch
+                <lqel-checkbox
+                    id="_single_checkbox"
+                    :true-label="1"
+                    :false-label="0"
+                    label="Option1"
+                />Switch
                 <lqel-switch
                     active-color="#13ce66"
                     inactive-color="#ff4949"
@@ -66,7 +76,7 @@
                     placeholder="Select date and time"
                 ></lqel-date-picker>
 
-                <!-- <lqel-select
+                <lqel-select
                     id="_select"
                     :remote="true"
                     action="https://api.github.com/users"
@@ -77,7 +87,7 @@
                     clearable
                     is-output-object
                     item-text="login"
-                /> -->
+                />
                 <lqel-select
                     id="_select2"
                     labelText="Create New Item"
@@ -91,11 +101,15 @@
                     is-output-object
                     item-text="name"
                 >
-                <template v-slot:item="{item, disabled}">
-                    <el-option :value="item.name" :disabled="disabled" />
-                </template>
-            </lqel-select>
-                <lqel-transfer filter-placeholder="State Abbreviations" id="_transfer" :data="data" />
+                    <template v-slot:item="{item, disabled}">
+                        <el-option :value="item.name" :disabled="disabled" />
+                    </template>
+                </lqel-select>
+                <lqel-transfer
+                    filter-placeholder="State Abbreviations"
+                    id="_transfer"
+                    :data="data"
+                />
                 <lqel-slider id="_slider" :step="10" show-stops />
                 <lqel-slider id="_slider2" show-input />
                 <div class="block">
@@ -108,33 +122,26 @@
                 </div>
                 <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button>
             </template>
-        </lqel-form>
-        <lqel-table action="https://jsonplaceholder.typicode.com/posts" 
+        </lqel-form> -->
+        <lq-list-filter  name="_test_table">
+            <template v-slot:default="props">
+                qwdqw {{props.model.selected}}
+            </template>
+        </lq-list-filter>
+        <lqel-table
+            action="https://gorest.co.in/public-api/users"
             tableName="_test_table"
-            dataKey="data" 
-            :default-sort = "{prop: 'id', order: 'descending'}"
-            >
-            <el-table-column
-              type="selection"
-              width="55">
-            </el-table-column>
-            <el-table-column
-                prop="title"
-                label="Title"
-                sortable="custom"
-                width="180">
-              </el-table-column>
-              <el-table-column
-                prop="id"
-                sortable="custom"
-                label="id"
-                width="180">
-              </el-table-column>
-               <el-table-column
-                prop="body"
-                label="Body"
-                width="180">
-              </el-table-column>
+            data-key="data.result"
+            total-key="data._meta.totalCount"
+            page-size-key="data._meta.perPage"
+            :transformKeys="['data._meta.perPage:page_size']"
+            :static-data="{_format: 'json', 'access-token': 'Z-m4SzDK_vtWbJHkxjK2V3z0AwiSWRBe6-r-'}"
+            :default-sort="{prop: 'id', order: 'descending'}"
+        >
+            <el-table-column type="selection" width="55"></el-table-column>
+            <el-table-column prop="id" sortable="custom" label="id" width="180"></el-table-column>
+            <el-table-column prop="first_name" label="First Name" sortable="custom" width="180"></el-table-column>
+            <el-table-column prop="last_name" label="Last Name" width="180"></el-table-column>
         </lqel-table>
     </div>
 </template>
