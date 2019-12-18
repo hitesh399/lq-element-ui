@@ -1,9 +1,10 @@
 <template>
     <div>
-        <!-- <lqel-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
+        <lqel-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
             <template v-slot="{model, submit}">
                 {{model}}
-                <lqel-input
+                <lqel-file id="_file" :thumb="{width:600, height: 600}" />
+                <!-- <lqel-input
                     labelText="Hello"
                     id="_text_field"
                     type="password"
@@ -119,10 +120,10 @@
                 <div class="block">
                     <span class="demonstration">With default value</span>
                     <lqel-color-picker id="color1"></lqel-color-picker>
-                </div>
+                </div> -->
                 <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button>
             </template>
-        </lqel-form> -->
+        </lqel-form>
         <lq-list-filter  name="_test_table">
             <template v-slot:default="props">
                 qwdqw {{props.model.selected}}

@@ -15,6 +15,7 @@ import Transfer from './components/Transfer'
 import Slider from './components/Slider'
 import Table from './components/Table'
 import Pagination from './components/Pagination'
+import LqVFile from './components/File/LqVFile'
 import { lqOptions } from './defaultOptions'
 
 
@@ -41,5 +42,6 @@ export default {
         Vue.component('lqel-slider', Slider)
         Vue.component('lqel-table', Table)
         Vue.component('lqel-pagination', Pagination)
+        Vue.component('lqel-file', LqVFile)
     }
 }
