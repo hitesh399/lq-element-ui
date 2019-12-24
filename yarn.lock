@@ -10808,10 +10808,10 @@ vue@^2.6.10:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
 
-vuejs-object-helper@^0.1.29:
-  version "0.1.29"
-  resolved "https://registry.yarnpkg.com/vuejs-object-helper/-/vuejs-object-helper-0.1.29.tgz#ce532523856297abd3e57d722f5a904017349b9f"
-  integrity sha512-aYFFGuiFXPBNkys9rzYfb11ax4VZNuX69Y9hbGU+iLzijpXf8y4DKsDMFLEB6qJn3cCnvKIRFlYk4fXQq/Z6IA==
+vuejs-object-helper@^0.1.30:
+  version "0.1.30"
+  resolved "https://registry.yarnpkg.com/vuejs-object-helper/-/vuejs-object-helper-0.1.30.tgz#5412c7e3a54202b2022366336a38349384035da7"
+  integrity sha512-rJzLM4Mxw+tLi8o5f3xMHgO0nQXZPZWPNcHsW6nKZKjRap5O4fG4tJGf1WF+7kXYnsIXgkmiJYEbtY00o44MVQ==
   dependencies:
     babel-preset-env "^1.7.0"
     babel-runtime "^6.26.0"

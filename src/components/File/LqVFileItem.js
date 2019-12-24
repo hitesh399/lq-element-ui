@@ -143,9 +143,6 @@ export default Vue.extend({
                     },
                     [
                         this.genItemWrapper(),
-                        // self.isImage || self.uploadedFileType === 'image' ?  self.genImageItem(true) : self.genFileItem(true),
-                        // this.genMessages(),
-                        // this.uploading ? this.genUploadProcess() : null
                     ]
                 )
             ]
@@ -161,34 +158,35 @@ export default Vue.extend({
             if (this.$scopedSlots.items) {
                 return this.$scopedSlots.items(this.itemScoped)
             }
-            console.log('I am here....', this.isImage || this.uploadedFileType === 'image')
             return this.$createElement(
                 'div',
                 {},
-                [this.isImage || this.uploadedFileType === 'image' ? this.genImageItem() : this.genFileItem()]
+                [this.isImage || this.uploadedFileType === 'image' ? this.genImageItem() : this.genActionItem()]
             )
         },
-        genImageItem(hover) {
-            console.log('I am Here to close..')
+        genImageItem() {
             return this.$createElement(
-                'el-image',
+                'el-card',
                 {
                     props: {
-                        src: this.previewImage,
-                        aspectRatio: this.lqFile.thumb ? this.lqFile.thumb.width / this.lqFile.thumb.height : this.lqFile.aspectRatio,
-                        class: {
-                            grey: true,
-                            'lighten-2': true
-                        }
+                        shadow: this.lqFile.shadow
                     }
                 },
                 [
                     this.$createElement(
-                        'div',
-                        [
-                            this.lqFile.openBrowser === false  ? this.genHoverItem() : null
-                        ]
-                    )
+                        'el-image',
+                        {
+                            props: {
+                                src: this.previewImage,
+                                aspectRatio: this.lqFile.thumb ? this.lqFile.thumb.width / this.lqFile.thumb.height : this.lqFile.aspectRatio,
+                                class: {
+                                    grey: true,
+                                    'lighten-2': true
+                                }
+                            }
+                        }
+                    ),
+                    this.genActionItem()
                 ]
             )
         },
@@ -234,72 +232,27 @@ export default Vue.extend({
             ])
 
         },
-        genFileItem(hover) {
+        genActionItem() {
             return this.$createElement(
                 'div',
                 {
-                    class: {
-                        // 'text-truncate' : true
-                    },
-                    style: {
-                        width: '100%',
-                        padding: '10px',
-                        'word-break': 'break-all'
-                    }
-                },
-                [
-                    this.$createElement(
-                        'div',
-                        [
-                            this.$createElement(
-                                'span',
-                                {
-                                    class: {
-                                        // 'text-truncate' : true
-                                    }
-                                },
-                                this.fileName
-                            ),
-                            this.$createElement(
-                                'div',
-                                [
-                                    this.lqFile.openBrowser === false && hover ? this.genHoverItem() : null
-                                ]
-                            )
-                        ]
-                    )
-                ]
-            )
-        },
-        genHoverItem() {
-            return this.$createElement(
-                'v-layout',
-                {
-                    class: {
-                        'transition-fast-in-fast-out': true,
-                        'backdrop': true,
-                    },
-                    style: {
-                        margin: 0,
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: '100%'
-                    },
+                    class: 'file-actions',
                     attrs: {
-                        'align-center': true,
-                        'justify-center': true,
-                        column: true,
-                        'fill-height': true,
-                        wrap: true
+
                     }
                 },
+
                 [
-                    this.genDeleteBtn(),
-                    this.genChangeBtn(),
-                    this.genCropBtn(),
-                    this.genResetBtn(),
-                    this.genViewBtn(),
+                    this.$createElement('span', { class: 'file-name' }, this.fileName),
+                    this.$createElement('div', {
+                        class: 'bottom clearfix'
+                    }, [
+                        this.genDeleteBtn(),
+                        this.genChangeBtn(),
+                        this.genCropBtn(),
+                        this.genResetBtn(),
+                        this.genViewBtn(),
+                    ])
                 ]
             )
         },
@@ -309,7 +262,12 @@ export default Vue.extend({
                 'el-button',
                 {
                     props: {
-                        icon: true,
+                        icon: this.lqFile.deleteIcon,
+                        plain: true,
+                        type: 'text'
+                    },
+                    attrs: {
+                        title: this.lqFile.deleteIconTitle
                     },
                     on: {
                         click: function (event) {
@@ -317,28 +275,18 @@ export default Vue.extend({
                             self.$emit('delete', self.fileObject, self.fileIndex)
                         }
                     }
-                },
-                [
-                    this.$createElement('v-icon',
-                        {
-                            attrs: {
-                                title: this.lqFile.deleteIconTitle
-                            }
-                        },
-                        this.lqFile.deleteIcon
-                    )
-                ]
-            )
+                })
         },
         genMessages() {
             if (this.hideDetails) return null
+            // console.log('this.error', this.error)
             if (this.error) {
                 return this.$createElement(
-                    'v-messages',
+                    'v-alert',
                     {
                         props: {
-                            value: [this.error],
-                            color: 'error'
+                            title: this.error,
+                            type: 'error'
                         }
                     }
                 )
@@ -353,27 +301,20 @@ export default Vue.extend({
                 'el-button',
                 {
                     props: {
-                        icon: true,
+                        icon: this.lqFile.changeIcon,
+                        plain: true,
+                        type: 'text'
                     },
                     on: {
                         click: function (event) {
                             event.stopPropagation()
                             self.$emit('open-window', self.fileIndex)
                         }
-                    }
-                },
-                [
-                    this.$createElement(
-                        'v-icon',
-                        {
-                            attrs: {
-                                title: self.lqFile.changeIconTitle
-                            },
-                        },
-                        this.lqFile.changeIcon
-                    )
-                ]
-            )
+                    },
+                    attrs: {
+                        title: self.lqFile.changeIconTitle
+                    },
+                })
         },
         genViewBtn() {
             if (!this.lqFile.showViewBtn) {
@@ -384,26 +325,20 @@ export default Vue.extend({
                 'el-button',
                 {
                     props: {
-                        icon: true,
+                        icon: this.lqFile.viewIcon,
+                        plain: true,
+                        type: 'text'
                     },
                     on: {
                         click: function (event) {
                             event.stopPropagation()
                             self.viewFile()
                         }
-                    }
-                },
-                [
-                    this.$createElement(
-                        'v-icon',
-                        {
-                            attrs: {
-                                title: self.lqFile.viewIconTitle
-                            },
-                        },
-                        this.lqFile.viewIcon
-                    )
-                ]
+                    },
+                    attrs: {
+                        title: self.lqFile.viewIconTitle
+                    },
+                }
             )
         },
         viewFile() {
@@ -424,7 +359,9 @@ export default Vue.extend({
                 'el-button',
                 {
                     props: {
-                        icon: true,
+                        icon: self.lqFile.resetIcon,
+                        plain: true,
+                        type: 'text'
                     },
                     on: {
                         click: function (event) {
@@ -432,19 +369,7 @@ export default Vue.extend({
                             self.resetFile()
                         }
                     }
-                },
-                [
-                    this.$createElement(
-                        'v-icon',
-                        {
-                            attrs: {
-                                title: self.lqFile.showResetTitle
-                            },
-                        },
-                        self.lqFile.resetIcon
-                    )
-                ]
-            )
+                })
         },
         resetFile() {
             if (this.fileInitializeValue) {
@@ -466,7 +391,9 @@ export default Vue.extend({
                 'el-button',
                 {
                     props: {
-                        icon: true,
+                        icon: this.lqFile.cropIcon,
+                        plain: true,
+                        type: 'text'
                     },
                     on: {
                         click: function (event) {
@@ -474,19 +401,7 @@ export default Vue.extend({
                             self.openCropper()
                         }
                     }
-                },
-                [
-                    this.$createElement(
-                        'v-icon',
-                        {
-                            attrs: {
-                                title: self.lqFile.cropIconTitle
-                            },
-                        },
-                        this.lqFile.cropIcon
-                    )
-                ]
-            )
+                })
         },
         openCropper() {
             this.$emit('open-cropper', this.fileObject, this.fileIndex)
@@ -544,7 +459,7 @@ export default Vue.extend({
                 !this.errorRules ||
                 this.errorRules.length === 0 ||
                 (
-                    this.errors.length === 1 && ( this.errorRules[0] === 'file:crop' || this.errorRules[0] === 'upload'  )
+                    this.errors.length === 1 && (this.errorRules[0] === 'file:crop' || this.errorRules[0] === 'upload')
                 )
                 ||
                 (

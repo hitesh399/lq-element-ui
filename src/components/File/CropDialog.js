@@ -37,7 +37,6 @@ export default Vue.extend({
     mounted() {
         this.$nextTick(() => {
             this.actionAreaWidth = this.$refs.CardText ? this.$refs.CardText.offsetWidth : this.lqFile.thumb.width
-            console.log('this.actionAreaWidth', this.actionAreaWidth, this.$refs.CardText)
         })
     },
     render(h) {
@@ -45,26 +44,30 @@ export default Vue.extend({
             return null;
         }
         const self = this;
+
         return h(
             'el-dialog',
             {
                 props: {
                     visible: this.dialog,
                     title: this.lqFile.popupTitle,
-                    // persistent: this.lqFile.croppPopupPersistent,
-                    width: this.lqFile.popupWidth,
+                    width: this.lqFile.popupWidth.toString() + 'px',
+                    closeOnClickModal: !this.lqFile.croppPopupPersistent
                 },
                 attrs: {
                     // width: 600
                 },
-                scopedSlots: {
-                    footer: () => 'asdadsdsd'
+                on: {
+                    close: () => {
+                        self.$emit('close', self.lqFile.fileObjectToCrop, self.lqFile.fileIndexToCrop)
+                        self.lqFile.onHideCropBox(false)
+                    }
                 }
             },
-            [              
-                       
-                       
-                 h(
+            [
+
+
+                h(
                     'div',
                     {
                         style: {
@@ -96,42 +99,51 @@ export default Vue.extend({
                             }
                         )
                     ]
-                )
-                       
+                ),
+                this.genFooter()
+
             ]
         )
     },
     methods: {
-        genDeleteBtn() {
+        genFooter() {
             const self = this;
-            return this.$createElement(
-                'v-btn',
-                {
-                    props: {
-                        flat: true,
-                        color: 'danger darken-1',
-                        disabled: self.cropping
-                    },
-                    on: {
-                        click: function (event) {
-                            event.stopPropagation()
-                            self.$emit('close', self.lqFile.fileObjectToCrop, self.lqFile.fileIndexToCrop)
-                            self.lqFile.onHideCropBox(false)
+            return this.$createElement('div', {
+                slot: 'footer'
+            }, [
+                this.genRotateBtn(),
+                this.genRotateBtn('left'),
+                this.$createElement(
+                    'el-button',
+                    {
+                        props: {
+                            color: 'green darken-1',
+                            flat: true,
+                            icon: this.lqFile.cropIcon,
+                            disabled: self.cropping
+                        },
+                        on: {
+                            click(event) {
+                                self.cropping = true
+                                event.stopPropagation()
+                                self.$refs.cropper.cropImage(() => {
+                                    self.cropping = false
+                                })
+                            }
                         }
-                    }
-                },
-                'Close'
-            )
+                    },
+                ),
+            ])
         },
-        genRotateBtn(moveTo = 'right', text = 'Rotate Right') {
+        genRotateBtn(moveTo = 'right') {
             const self = this;
             if (!this.lqFile.enableRotate) return
             return this.$createElement(
-                'v-btn',
+                'el-button',
                 {
                     props: {
-                        icon: true,
-                        disabled: self.cropping
+                        icon: moveTo === 'right' ? this.lqFile.rotateRightIcon : this.lqFile.rotateLeftIcon,
+                        disabled: self.cropping,
                     },
                     on: {
                         click: function (event) {
@@ -145,21 +157,11 @@ export default Vue.extend({
                                 self.degrees = 90
                             }
 
-                            self.$refs.cropper.changeRotate(self.degrees )
+                            self.$refs.cropper.changeRotate(self.degrees)
                         }
                     }
-                },
-                [
-                    this.$createElement('v-icon',
-                        {
-                            attrs: {
-                                title: text
-                            }
-                        },
-                        moveTo === 'right' ? this.lqFile.rotateRightIcon :  this.lqFile.rotateLeftIcon
-                    )
-                ]
-                
+                }
+
             )
         }
     }

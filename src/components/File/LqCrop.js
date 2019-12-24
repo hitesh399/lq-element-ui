@@ -241,6 +241,7 @@ export default Vue.extend({
                 {
                     props: {
                         type: 'warning',
+                        closable: false,
                         title: `Original Image dimensions are ${this.orgWidth}x${this.orgHeight} and after cropped Image dimensions are ${this.cropWidth}x${this.cropHeight} but mininum required dimensions are ${this.minWidth}x${this.minHeight}. So Please Zoom out image and try again.`
                     }
                 })

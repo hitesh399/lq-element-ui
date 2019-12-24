@@ -1,46 +1,46 @@
 <template>
     <div>
-        <lqel-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
+        <lq-el-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
             <template v-slot="{model, submit}">
                 {{model}}
-                <lqel-file id="_file" :thumb="{width:600, height: 600}" />
-                <!-- <lqel-input
+                <lq-el-file id="_file"  :thumb="{width:600, height: 600}" />
+                <!-- <lq-el-input
                     labelText="Hello"
                     id="_text_field"
                     type="password"
                     :show-password="true"
                 >
                     <template v-slot:label>I am Label</template>
-                </lqel-input>
-                <lqel-input-number id="_number" @change="handleChangeNumber" :min="1" :max="10"></lqel-input-number>Group Radio Button
-                <lqel-radio-group id="_radio">
+                </lq-el-input>
+                <lq-el-input-number id="_number" @change="handleChangeNumber" :min="1" :max="10"></lq-el-input-number>Group Radio Button
+                <lq-el-radio-group id="_radio">
                     <el-radio :label="3">Option A</el-radio>
                     <el-radio :label="6">Option B</el-radio>
                     <el-radio :label="9">Option C</el-radio>
-                </lqel-radio-group>Single radio Button
-                <lqel-radio :label="3" id="_single_radio_btn">Option A</lqel-radio>
-                <lqel-radio :label="4" id="_single_radio_btn">Option A</lqel-radio>Group Checkbox
-                <lqel-checkbox-group id="_checkList">
+                </lq-el-radio-group>Single radio Button
+                <lq-el-radio :label="3" id="_single_radio_btn">Option A</lq-el-radio>
+                <lq-el-radio :label="4" id="_single_radio_btn">Option A</lq-el-radio>Group Checkbox
+                <lq-el-checkbox-group id="_checkList">
                     <el-checkbox label="Option A"></el-checkbox>
                     <el-checkbox label="Option B"></el-checkbox>
                     <el-checkbox label="Option C"></el-checkbox>
                     <el-checkbox label="disabled"></el-checkbox>
                     <el-checkbox label="selected and disabled"></el-checkbox>
-                </lqel-checkbox-group>Single Checkbox
-                <lqel-checkbox
+                </lq-el-checkbox-group>Single Checkbox
+                <lq-el-checkbox
                     id="_single_checkbox"
                     :true-label="1"
                     :false-label="0"
                     label="Option1"
                 />Switch
-                <lqel-switch
+                <lq-el-switch
                     active-color="#13ce66"
                     inactive-color="#ff4949"
                     active-text="Pay by month"
                     inactive-text="Pay by year"
                     id="_switch"
-                ></lqel-switch>
-                <lqel-time-select
+                ></lq-el-switch>
+                <lq-el-time-select
                     id="_time"
                     :picker-options="{
                 start: '08:30',
@@ -48,8 +48,8 @@
                 end: '18:30'
             }"
                     placeholder="Select time"
-                ></lqel-time-select>Time Range
-                <lqel-time-select
+                ></lq-el-time-select>Time Range
+                <lq-el-time-select
                     placeholder="Start time"
                     id="startTime"
                     :picker-options="{
@@ -58,8 +58,8 @@
             end: '18:30',
             maxTime: model.endTime
             }"
-                ></lqel-time-select>
-                <lqel-time-select
+                ></lq-el-time-select>
+                <lq-el-time-select
                     placeholder="End time"
                     id="endTime"
                     :picker-options="{
@@ -68,16 +68,16 @@
             end: '18:30',
             minTime: model.startTime
             }"
-                ></lqel-time-select>
+                ></lq-el-time-select>
 
-                <lqel-date-picker id="_date_picker" type="date" placeholder="Pick a day"></lqel-date-picker>
-                <lqel-date-picker
+                <lq-el-date-picker id="_date_picker" type="date" placeholder="Pick a day"></lq-el-date-picker>
+                <lq-el-date-picker
                     id="_datetime_picker"
                     type="datetime"
                     placeholder="Select date and time"
-                ></lqel-date-picker>
+                ></lq-el-date-picker>
 
-                <lqel-select
+                <lq-el-select
                     id="_select"
                     :remote="true"
                     action="https://api.github.com/users"
@@ -89,7 +89,7 @@
                     is-output-object
                     item-text="login"
                 />
-                <lqel-select
+                <lq-el-select
                     id="_select2"
                     labelText="Create New Item"
                     :filterable="true"
@@ -105,31 +105,29 @@
                     <template v-slot:item="{item, disabled}">
                         <el-option :value="item.name" :disabled="disabled" />
                     </template>
-                </lqel-select>
-                <lqel-transfer
+                </lq-el-select>
+                <lq-el-transfer
                     filter-placeholder="State Abbreviations"
                     id="_transfer"
                     :data="data"
                 />
-                <lqel-slider id="_slider" :step="10" show-stops />
-                <lqel-slider id="_slider2" show-input />
+                <lq-el-slider id="_slider" :step="10" show-stops />
+                <lq-el-slider id="_slider2" show-input />
                 <div class="block">
                     <span class="demonstration">Color for different levels</span>
-                    <lqel-rate id="_rate" :colors="colors"></lqel-rate>
+                    <lq-el-rate id="_rate" :colors="colors"></lq-el-rate>
                 </div>
                 <div class="block">
                     <span class="demonstration">With default value</span>
-                    <lqel-color-picker id="color1"></lqel-color-picker>
-                </div> -->
+                    <lq-el-color-picker id="color1"></lq-el-color-picker>
+                </div>-->
                 <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button>
             </template>
-        </lqel-form>
-        <lq-list-filter  name="_test_table">
-            <template v-slot:default="props">
-                qwdqw {{props.model.selected}}
-            </template>
+        </lq-el-form>
+        <lq-list-filter name="_test_table">
+            <template v-slot:default="props">qwdqw {{props.model.selected}}</template>
         </lq-list-filter>
-        <lqel-table
+        <lq-el-table
             action="https://gorest.co.in/public-api/users"
             tableName="_test_table"
             data-key="data.result"
@@ -143,7 +141,7 @@
             <el-table-column prop="id" sortable="custom" label="id" width="180"></el-table-column>
             <el-table-column prop="first_name" label="First Name" sortable="custom" width="180"></el-table-column>
             <el-table-column prop="last_name" label="Last Name" width="180"></el-table-column>
-        </lqel-table>
+        </lq-el-table>
     </div>
 </template>
 <script>
@@ -178,6 +176,18 @@ export default {
             rules: {
                 _text_field: {
                     presence: { allowEmpty: false }
+                },
+                _file: {
+                    presence: { allowEmpty: false },
+                    file: {
+                        message: {
+                            acceptedFiles: '^Please select only image.',
+                            maxFileSize: '^Image size should be less than 5 MB.'
+                        },
+                        acceptedFiles: 'image/*',
+                        // maxFileSize: 5,
+                        minImageDimensions: [600, 600]
+                    }
                 },
                 _rate: { presence: { allowEmpty: false } }
             }

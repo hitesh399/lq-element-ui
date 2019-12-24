@@ -183,7 +183,10 @@ export default Vue.extend({
             type: Object,
             default: () => {
                 return {
-                    gutter: 10
+                    gutter: 10,
+                    align: 'middle',
+                    justify: 'center',
+                    // type: 'flex'
                 }
             }
         },
@@ -197,6 +200,10 @@ export default Vue.extend({
         clickEveryWhere: {
             type: Boolean,
             default: () => false
+        },
+        shadow: {
+            type: String,
+            default: () => 'hover'
         }
     },
     data() {
@@ -261,7 +268,7 @@ export default Vue.extend({
             {
                 class: {
                     'has-errors': this.errors && this.errors.length ? true : false,
-                    [this.wrapperClass] : this.wrapperClass ? true: false
+                    [this.wrapperClass]: this.wrapperClass ? true : false
                 },
                 on: {
                     dragover: (e) => { e.preventDefault(); },
@@ -276,6 +283,7 @@ export default Vue.extend({
                     this.layoutTag,
                     {
                         props: this.layoutProps,
+                        attrs: this.layoutProps,
                         class: this.rowClass
                     },
                     items
@@ -301,7 +309,7 @@ export default Vue.extend({
                     'el-alert',
                     {
                         props: {
-                            title: this.validations,
+                            title: this.validations[0],
                             type: 'error'
                         }
                     }
@@ -388,10 +396,18 @@ export default Vue.extend({
                 [
                     this.$createElement(
                         'el-row',
-                        {                            
+                        {
                             style: {
-                                margin: 0
+                                margin: 0,
+                                'min-height': `${(this.boxHeight ? this.boxHeight : 100)}px`,
+                                'height': '100%',
                             },
+                            props: {
+                                align: 'middle',
+                                justify: 'center',
+                                type: 'flex'
+                            },
+
                         },
 
                         [
@@ -407,7 +423,7 @@ export default Vue.extend({
             return this.$createElement(
                 'el-col',
                 {
-                    attrs: this.flexProps
+                    props: this.flexProps
                 },
                 content
             )
