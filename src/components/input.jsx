@@ -3,6 +3,7 @@ import DirectInput from '../lq-form-element-maker/DirectInput'
 
 export default DirectInput.extend({
     name: 'lqel-text-field',
+    inheritAttrs: false,
     data() {
         return {
             tagName: 'el-input',
@@ -19,6 +20,11 @@ export default DirectInput.extend({
         if (!this.insideFormItem) {
             return i
         }
+        const slotData = {error: this.elError, value: this.LQElement}
+
+        const before = this.$scopedSlots.before ? this.$scopedSlots.before(slotData) : null
+        const after = this.$scopedSlots.after ? this.$scopedSlots.after(slotData) : null
+
         return createElement(
             'el-form-item',
             {
@@ -34,7 +40,7 @@ export default DirectInput.extend({
                     label: props => this.$scopedSlots.label ? this.$scopedSlots.label(props) : null
                 },
             },
-            [i]
+            [before, i, after]
         )
     },
     props: {
@@ -48,7 +54,7 @@ export default DirectInput.extend({
         showAsterisk:{
             default: () => true,
             type: Boolean
-        },
+        }
     },
 
     methods: {
@@ -57,7 +63,14 @@ export default DirectInput.extend({
                 ...this.$attrs,
                 disabled: this.isDisabled,
                 value: this.LQElement,
-                name: this.id,
+                name: this.id
+            }
+        },
+        _defaultAttrs() {
+            return {
+                ...this.$attrs,
+                id: `${this.lqForm.name}.${this.id}`,
+               
             }
         },
         onChange(value) {

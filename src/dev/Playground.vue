@@ -3,19 +3,21 @@
         <lq-el-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
             <template v-slot="{model, submit}">
                 {{model}}
-                <lq-el-phone id="phone_no" />
+               <!--  <lq-el-phone id="phone_no" placeholder="Test I am here a placeholder" />
                 <lq-el-phone-or-text id="phone_no_email" />
                 <lq-el-place id="place" :value="test_value" />
-                <lq-el-file id="_file" :thumb="{width:600, height: 600}" />
-                <!-- <lq-el-input
-                    labelText="Hello"
+                <lq-el-file id="_file" :thumb="{width:600, height: 600}" /> -->
+                <el-input placeholder="Please input" ></el-input>
+
+               <lq-el-input
+                    placeholder="Test I am here a placeholder"
                     id="_text_field"
-                    type="password"
-                    :show-password="true"
+                    label-text="Test"
+                    type="text"
                 >
-                    <template v-slot:label>I am Label</template>
+                  <template v-slot:label>I am Label</template>
                 </lq-el-input>
-                <lq-el-input-number id="_number" @change="handleChangeNumber" :min="1" :max="10"></lq-el-input-number>Group Radio Button
+                <!--    <lq-el-input-number id="_number" @change="handleChangeNumber" :min="1" :max="10"></lq-el-input-number>Group Radio Button
                 <lq-el-radio-group id="_radio">
                     <el-radio :label="3">Option A</el-radio>
                     <el-radio :label="6">Option B</el-radio>
