@@ -234,7 +234,7 @@ export default Vue.extend({
                     default: props => [
                         this.getDataTable(props),
                         this.$createElement(
-                            'lqel-pagination',
+                            'lq-el-pagination',
                             {
                                 attrs: this.paginationProps,
                                 on: {

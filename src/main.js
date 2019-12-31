@@ -16,6 +16,9 @@ import Slider from './components/Slider'
 import Table from './components/Table'
 import Pagination from './components/Pagination'
 import LqVFile from './components/File/LqVFile'
+import Phone from './components/Phone'
+import PhoneOrText from './components/PhoneOrText'
+import Place from './components/Place'
 import { lqOptions } from './defaultOptions'
 
 
@@ -43,5 +46,8 @@ export default {
         Vue.component('lq-el-table', Table)
         Vue.component('lq-el-pagination', Pagination)
         Vue.component('lq-el-file', LqVFile)
+        Vue.component('lq-el-phone', Phone)
+        Vue.component('lq-el-phone-or-text', PhoneOrText)
+        Vue.component('lq-el-place', Place)
     }
 }

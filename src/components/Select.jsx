@@ -51,7 +51,7 @@ export default Input.extend({
          * @param {function} createElement 
          * @param {Object} slots 
          */
-        renderSlots(createElement, slots) {
+        renderSlots() {
             return this.groupBy ? this.renderOptionsWithGroup() : this.renderOptions(this.finalItems)
         },
         renderOptions(items) {

@@ -14,7 +14,7 @@ import helper from 'vuejs-object-helper'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/en'
-
+import 'vue-phone-number-input/dist/vue-phone-number-input.css';
 
 Object.defineProperty(
     Vue.prototype, 

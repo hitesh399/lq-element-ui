@@ -3,7 +3,10 @@
         <lq-el-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
             <template v-slot="{model, submit}">
                 {{model}}
-                <lq-el-file id="_file"  :thumb="{width:600, height: 600}" />
+                <lq-el-phone id="phone_no" />
+                <lq-el-phone-or-text id="phone_no_email" />
+                <lq-el-place id="place" :value="test_value" />
+                <lq-el-file id="_file" :thumb="{width:600, height: 600}" />
                 <!-- <lq-el-input
                     labelText="Hello"
                     id="_text_field"
@@ -121,10 +124,10 @@
                     <span class="demonstration">With default value</span>
                     <lq-el-color-picker id="color1"></lq-el-color-picker>
                 </div>-->
-                <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button>
+                <!-- <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button> -->
             </template>
         </lq-el-form>
-        <lq-list-filter name="_test_table">
+        <!-- <lq-list-filter name="_test_table">
             <template v-slot:default="props">qwdqw {{props.model.selected}}</template>
         </lq-list-filter>
         <lq-el-table
@@ -141,7 +144,7 @@
             <el-table-column prop="id" sortable="custom" label="id" width="180"></el-table-column>
             <el-table-column prop="first_name" label="First Name" sortable="custom" width="180"></el-table-column>
             <el-table-column prop="last_name" label="Last Name" width="180"></el-table-column>
-        </lq-el-table>
+        </lq-el-table>-->
     </div>
 </template>
 <script>
@@ -173,6 +176,22 @@ export default {
             radio: 1,
             data: generateData(),
             colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
+            test_value: {
+                formatted_address:
+                    'Agra - Lucknow Expy, Khargua, Deeg, Uttar Pradesh, India',
+                geometry: {
+                    location: { lat: 26.9097795, lng: 79.2322001 },
+                    viewport: {
+                        south: 26.9084305197085,
+                        west: 79.23085111970852,
+                        north: 26.9111284802915,
+                        east: 79.23354908029148
+                    }
+                },
+                place_id:
+                    'EjhBZ3JhIC0gTHVja25vdyBFeHB5LCBLaGFyZ3VhLCBEZWVnLCBVdHRhciBQcmFkZXNoLCBJbmRpYSIuKiwKFAoSCYU2Qmd7a3Q5EfLivNhidG9FEhQKEglZDb8j5fp1OREYbxU6obqUwg',
+                id: 'test_form.place'
+            },
             rules: {
                 _text_field: {
                     presence: { allowEmpty: false }

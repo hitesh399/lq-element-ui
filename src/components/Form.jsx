@@ -9,17 +9,30 @@ export default Vue.extend({
         tag: {
             type: String,
             default: () => 'form'
+        },
+        staticData: Object,
+        disabled: Boolean
+    },
+    provide() {
+        return {
+            lqEForm: this
         }
+    },
+    data() {
+        return { busy: false }
     },
     render(createElement) {
         return createElement('el-form', {
-            on: {
-                submit: e => { e.preventDefault(); this.submit() },
-                ...this.$listeners
+            on: this.$listeners,
+            nativeOn: {
+                submit: e => { e.preventDefault(); !this.busy ? this.submit(this.staticData) : null },
             },
             // domProps: this.$attrs,
             staticClass: 'v-form lq-v-form',
-            props: this.$attrs,
+            props: {
+                disabled: this.disabled || this.busy,
+                ...this.$attrs
+            },
             attrs: Object.assign({
                 novalidate: true
             }, this.$attrs),
