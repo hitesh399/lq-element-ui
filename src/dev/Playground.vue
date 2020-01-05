@@ -1,12 +1,12 @@
 <template>
     <div>
-        <lq-el-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
+       <!--  <lq-el-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
             <template v-slot="{model, submit}">
                 {{model}}
-               <!--  <lq-el-phone id="phone_no" placeholder="Test I am here a placeholder" />
-                <lq-el-phone-or-text id="phone_no_email" />
+                <lq-el-phone id="phone_no" placeholder="Test I am here a placeholder" size="sm" />
+                <lq-el-phone-or-text id="phone_no_email" placeholder="Email/Mobile No."/>
                 <lq-el-place id="place" :value="test_value" />
-                <lq-el-file id="_file" :thumb="{width:600, height: 600}" /> -->
+                <lq-el-file id="_file" :thumb="{width:600, height: 600}" />
                 <el-input placeholder="Please input" ></el-input>
 
                <lq-el-input
@@ -16,7 +16,7 @@
                     type="text"
                 >
                   <template v-slot:label>I am Label</template>
-                </lq-el-input>
+                </lq-el-input> -->
                 <!--    <lq-el-input-number id="_number" @change="handleChangeNumber" :min="1" :max="10"></lq-el-input-number>Group Radio Button
                 <lq-el-radio-group id="_radio">
                     <el-radio :label="3">Option A</el-radio>
@@ -127,12 +127,14 @@
                     <lq-el-color-picker id="color1"></lq-el-color-picker>
                 </div>-->
                 <!-- <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button> -->
-            </template>
-        </lq-el-form>
-        <!-- <lq-list-filter name="_test_table">
+      <!--       </template>
+        </lq-el-form> -->
+         <lq-list-filter name="_test_table">
             <template v-slot:default="props">qwdqw {{props.model.selected}}</template>
         </lq-list-filter>
         <lq-el-table
+            :defaultPageSize="20"
+            :sortByKeyTransform="{first_name: 'last_game'}"
             action="https://gorest.co.in/public-api/users"
             tableName="_test_table"
             data-key="data.result"
@@ -142,11 +144,12 @@
             :static-data="{_format: 'json', 'access-token': 'Z-m4SzDK_vtWbJHkxjK2V3z0AwiSWRBe6-r-'}"
             :default-sort="{prop: 'id', order: 'descending'}"
         >
+            <lq-el-table-index />
             <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column prop="id" sortable="custom" label="id" width="180"></el-table-column>
             <el-table-column prop="first_name" label="First Name" sortable="custom" width="180"></el-table-column>
             <el-table-column prop="last_name" label="Last Name" width="180"></el-table-column>
-        </lq-el-table>-->
+        </lq-el-table>
     </div>
 </template>
 <script>

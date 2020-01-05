@@ -54,7 +54,8 @@ export default DirectInput.extend({
         showAsterisk:{
             default: () => true,
             type: Boolean
-        }
+        },
+        placeholder: String
     },
 
     methods: {
@@ -63,12 +64,13 @@ export default DirectInput.extend({
                 ...this.$attrs,
                 disabled: this.isDisabled,
                 value: this.LQElement,
-                name: this.id
+                name: this.id,
+                placeholder: this.placeholder
             }
         },
         _defaultAttrs() {
             return {
-                ...this.$attrs,
+                placeholder: this.placeholder,
                 id: `${this.lqForm.name}.${this.id}`,
                
             }

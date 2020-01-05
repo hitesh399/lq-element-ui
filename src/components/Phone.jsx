@@ -7,7 +7,8 @@ export default Input.extend({
     components: { VuePhoneNumberInput },
     props: {
         defaultCountryCode: String,
-        autofocus: Boolean
+        autofocus: Boolean,
+        phoneSize: String,
     },
     data() {
         return {
@@ -43,6 +44,7 @@ export default Input.extend({
             const mn = parsePhoneNumberFromString(this.LQElement ? this.LQElement : '')
             return {
                 ...this._defaultProps(),
+                size: this.phoneSize,
                 value: mn ? mn.nationalNumber : this.LQElement,
                 error: !!this.elError,
                 defaultCountryCode: this.countryCode ? this.countryCode : this.defaultCountryCode

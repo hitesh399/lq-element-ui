@@ -14,6 +14,10 @@ const lqOptions = {
         ascStr: 'ascending',
         descStr: 'descending',
         pageKey: 'page',
+        sortByKey: 'sort_by',
+        defaultPaginationProps: {
+            background: true
+        },
 
         // File Options
         cropperPopupWidth: 400,
@@ -63,11 +67,17 @@ const lqOptions = {
     get ascStr() {
         return this.options.ascStr
     },
+    get sortByKey() {
+        return this.options.sortByKey
+    },
+    get paginationProps() {
+        return this.options.defaultPaginationProps
+    },
     get pageKey() {
         return this.options.pageKey
     },
     get dataKey() {
-        return this.options.ascStr
+        return this.options.dataKey
     },
     get descStr() {
         return this.options.descStr

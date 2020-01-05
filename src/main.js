@@ -19,6 +19,7 @@ import LqVFile from './components/File/LqVFile'
 import Phone from './components/Phone'
 import PhoneOrText from './components/PhoneOrText'
 import Place from './components/Place'
+import TableIndex from './components/TableIndex'
 import { lqOptions } from './defaultOptions'
 
 
@@ -44,6 +45,7 @@ export default {
         Vue.component('lq-el-transfer', Transfer)
         Vue.component('lq-el-slider', Slider)
         Vue.component('lq-el-table', Table)
+        Vue.component('lq-el-table-index', TableIndex)
         Vue.component('lq-el-pagination', Pagination)
         Vue.component('lq-el-file', LqVFile)
         Vue.component('lq-el-phone', Phone)

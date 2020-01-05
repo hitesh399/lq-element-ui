@@ -76,11 +76,19 @@ export default Vue.extend({
             default: () => lqOptions.keepSelectedOnPageChange
         },
         otherServerData: Array,
-        paginationProps: Object,
+        paginationProps: {
+            type: Object,
+            default: () => lqOptions.paginationProps
+        },
         pageKey: {
             type: String,
             default: () => lqOptions.pageKey
-        }
+        },
+        sortByKey: {
+            type: String,
+            default: () => lqOptions.sortByKey
+        },
+        sortByKeyTransform: Object
     },
     data() {
         return {
@@ -92,9 +100,7 @@ export default Vue.extend({
             if (this.defaultSort) {
                 const { prop, order } = this.defaultSort
                 if (order) {
-                    this.$lqForm.setElementVal(this.tableName, 'sort_by', {
-                        [prop]: this.getOrderStr(order, this.ascStr, this.descStr)
-                    })
+                    this.setSortByInStore(prop, order)
                 }
             }
         }
@@ -107,7 +113,7 @@ export default Vue.extend({
     },
     computed: {
         sortBy: function () {
-            return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', 'sort_by'], null);
+            return this.$helper.getProp(this.$store.state, ['form', this.tableName, 'values', this.sortByKey], null);
         },
         sortObjectForElement() {
             let sort = []
@@ -115,7 +121,7 @@ export default Vue.extend({
                 const keys = Object.keys(this.sortBy)
                 keys.forEach(prop => {
                     sort.push({
-                        prop,
+                        prop: [this.getSortByKeySenceOfProp(prop)],
                         order: this.getOrderStr(this.sortBy[prop], 'ascending', 'descending')
                     })
                 })
@@ -134,6 +140,26 @@ export default Vue.extend({
         },
     },
     methods: {
+        getSortByKeySenceOfProp(prop) {
+            if (this.sortByKeyTransform && this.getKeyByValue(this.sortByKeyTransform, prop)) {
+                return this.getKeyByValue(this.sortByKeyTransform, prop)
+            }
+            return prop
+        },
+        getSortByKeySenceOfRequest(prop) {
+            if (this.sortByKeyTransform && this.sortByKeyTransform[prop]) {
+                return this.sortByKeyTransform[prop]
+            }
+            return prop
+        },
+        setSortByInStore(prop, order) {
+            this.$lqForm.setElementVal(this.tableName, this.sortByKey, {
+                [this.getSortByKeySenceOfRequest(prop)]: this.getOrderStr(order, this.ascStr, this.descStr)
+            })
+        },
+        getKeyByValue(object, value) {
+            return Object.keys(object).find(key => object[key] === value);
+        },
         getAscString(order, ascStr) {
             if (['asc', 'ascending'].includes(order.toString().toLocaleLowerCase())) {
                 return ascStr ? ascStr : 'asc'
@@ -176,11 +202,9 @@ export default Vue.extend({
                         },
                         'sort-change': ({ prop, order }) => {
                             if (!order) {
-                                this.$lqForm.setElementVal(this.tableName, 'sort_by', null)
+                                this.$lqForm.setElementVal(this.tableName, this.sortByKey, null)
                             } else {
-                                this.$lqForm.setElementVal(this.tableName, 'sort_by', {
-                                    [prop]: this.getOrderStr(order, this.ascStr, this.descStr)
-                                })
+                                this.setSortByInStore(prop, order)
                             }
                             this.$lqTable.refresh(this.tableName, false);
                         }
@@ -213,7 +237,7 @@ export default Vue.extend({
                     action: this.action,
                     primaryKey: this.itemKey,
                     dataKey: this.dataKey,
-                    extraDataKeys: ['sort_by'],
+                    extraDataKeys: [this.sortByKey],
                     autoFilter: this.autoFilter,
                     keepSelectedOnPageChange: this.keepSelectedOnPageChange,
                     defaultPageSize: this.defaultPageSize,
