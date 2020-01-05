@@ -20,6 +20,7 @@ import Phone from './components/Phone'
 import PhoneOrText from './components/PhoneOrText'
 import Place from './components/Place'
 import TableIndex from './components/TableIndex'
+import TimePicker from './components/TimePicker'
 import { lqOptions } from './defaultOptions'
 
 
@@ -51,5 +52,6 @@ export default {
         Vue.component('lq-el-phone', Phone)
         Vue.component('lq-el-phone-or-text', PhoneOrText)
         Vue.component('lq-el-place', Place)
+        Vue.component('lq-el-time-picker', TimePicker)
     }
 }

@@ -67,6 +67,10 @@ export default Vue.extend({
             type: String,
             default: () => 'prepend'
         },
+        storageUrl: {
+            type: String,
+            default: () => lqOptions.storageUrl
+        },
         hideDetails: {
             type: Boolean,
             default: () => false
@@ -390,8 +394,8 @@ export default Vue.extend({
                     },
                     on: {
                         click: (e) => { e.stopPropagation(); this.handleClick() },
-                    },
-                    nativeOn: {}
+                    }
+                    // nativeOn: {}
                 },
                 [
                     this.$createElement(
@@ -463,14 +467,18 @@ export default Vue.extend({
             this.fileIndexTochange = undefined
             this.inputFileMultiple = this.multiple
             this.openBrowser = false;
+            this.testDirty(this.fileObject)
         },
-        formatter() {
+        __formatter(fileObject) {
             let fnc = this.formatterFnc;
             if (typeof fnc === 'function') {
-                return fnc.call(this)
+                return fnc.call({ multiple: this.multiple, fileObject: fileObject, primaryKey: this.primaryKey })
             } else {
                 throw Error('formatter function is Required.')
             }
+        },
+        formatter() {
+            return this.__formatter(this.fileObject)
         },
         clickOnInputFile() {
             document.body.onfocus = this.checkIt;
@@ -490,9 +498,11 @@ export default Vue.extend({
             this.showCropBox = false;
             this.fileIndexToCrop = null;
             this.fileObjectToCrop = null;
+            this.testDirty(this.fileObject)
             if (emit) {
                 this.$emit('cropped')
             }
+
         },
         handleClick(fileIndex) {
             if (!this.isDisabled) {
@@ -525,17 +535,17 @@ export default Vue.extend({
                 });
             } else {
                 // console.log('I am calling Here.')
-                this.deleteFile(file)
+                this.deleteFile(file, true)
             }
         },
-        deleteFile(file) {
+        deleteFile(file, forceretore) {
 
             if (!this.touch) {
                 this.touchStatus(true);
             }
             if (!this.multiple) {
                 this.setValue(null, false, false)
-                if (this.fileInitializeValue && this.resetOnDelete) {
+                if (this.fileInitializeValue && this.resetOnDelete || forceretore) {
                     const fileval = { ...this.fileInitializeValue }
                     this.$store.dispatch('form/setElementValue', {
                         formName: this.lqForm.name,
@@ -555,6 +565,7 @@ export default Vue.extend({
                     }
                 });
             }
+            this.testDirty(this.fileObject)
         }
     },
     created() {

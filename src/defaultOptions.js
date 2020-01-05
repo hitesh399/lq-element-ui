@@ -39,6 +39,7 @@ const lqOptions = {
         uploadUrl: 'http://localhost/lq_server_sample/public/api/media',
         tokenUrl: 'http://localhost/lq_server_sample/public/api/media-token',
         uploadFileName: 'file',
+        storageUrl: null,
         uploadResponseKey: 'data.media',
         formatterFnc: function (onlyPrimary = false) {
             let fileObject = !this.multiple && this.fileObject ? [this.fileObject] : this.fileObject;
@@ -63,6 +64,9 @@ const lqOptions = {
     },
     get rowsPerPageItems() {
         return this.options.rowsPerPageItems
+    },
+    get storageUrl() {
+        return this.options.storageUrl
     },
     get ascStr() {
         return this.options.ascStr

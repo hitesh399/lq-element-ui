@@ -28,7 +28,7 @@ export default Vue.extend({
                 submit: e => { e.preventDefault(); !this.busy ? this.submit(this.staticData) : null },
             },
             // domProps: this.$attrs,
-            staticClass: 'v-form lq-v-form',
+            staticClass: 'el-form lq-el-form',
             props: {
                 disabled: this.disabled || this.busy,
                 ...this.$attrs
@@ -45,6 +45,9 @@ export default Vue.extend({
             submit: this.submit,
             remove: this.remove,
             removeError: this.removeError,
+            formInitialvalues: this.formInitialvalues,
+            getElement: this.getElement,
+            dirty: this.dirty
         }))
     }
 })

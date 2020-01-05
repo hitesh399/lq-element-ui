@@ -91,7 +91,12 @@ export default Vue.extend({
             return !(this.file || this.uploadedFileUrl)
         },
         uploadedFileUrl: function () {
-            return helper.getProp(this.fileObject, this.lqFile.valueKey, null);
+            const value = helper.getProp(this.fileObject, this.lqFile.valueKey, null);
+            if (this.lqFile.storageUrl) {
+                return this.lqFile.storageUrl + value;
+            } else {
+                return value
+            }
         },
         previewImage: function () {
             return this.imageRawData ? this.imageRawData : (this.uploadedFileUrl ? this.uploadedFileUrl : '')

@@ -29,7 +29,7 @@ export default DirectInput.extend({
             'el-form-item',
             {
                 props: {
-                    label: this.labelText,
+                    label: this.label,
                     error: this.elError ? this.elError[0] : '',
                     labelWidth: this.labelWidth,
                     size: this.size,
@@ -45,7 +45,7 @@ export default DirectInput.extend({
     },
     props: {
         size: String,
-        labelText: String,
+        label: String,
         labelWidth: String,
         insideFormItem: {
             default: () => true,
