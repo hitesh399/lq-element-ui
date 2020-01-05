@@ -21,6 +21,7 @@ import PhoneOrText from './components/PhoneOrText'
 import Place from './components/Place'
 import TableIndex from './components/TableIndex'
 import TimePicker from './components/TimePicker'
+import FormItem from './components/FormItem'
 import { lqOptions } from './defaultOptions'
 
 
@@ -49,6 +50,7 @@ export default {
         Vue.component('lq-el-table-index', TableIndex)
         Vue.component('lq-el-pagination', Pagination)
         Vue.component('lq-el-file', LqVFile)
+        Vue.component('lq-el-form-item', FormItem)
         Vue.component('lq-el-phone', Phone)
         Vue.component('lq-el-phone-or-text', PhoneOrText)
         Vue.component('lq-el-place', Place)
