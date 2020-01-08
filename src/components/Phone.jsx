@@ -32,10 +32,13 @@ export default Input.extend({
     },
     inject: ['lqEForm'],
     watch: {
-        countryCode(newCode) {
-            if (this.$refs.lqel) {
-                this.$refs.lqel.results.countryCode = newCode
-            }
+        countryCode: {
+            handler(newCode) {
+                if (this.$refs.lqel && newCode) {
+                    this.$refs.lqel.results.countryCode = newCode
+                }
+            },
+            immediate: true,
         }
     },
     methods: {
