@@ -95,6 +95,10 @@ export default Vue.extend({
             type: Boolean,
             default: () => true
         },
+        showThumbView: {
+            type: Boolean,
+            default: () => true
+        },
         rotateRightIcon: {
             type: String,
             default: () => lqOptions.rotateRightIcon

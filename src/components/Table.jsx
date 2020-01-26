@@ -80,6 +80,10 @@ export default Vue.extend({
             type: Object,
             default: () => lqOptions.paginationProps
         },
+        listTag: {
+            type: String,
+            default: () => 'div'
+        },
         pageKey: {
             type: String,
             default: () => lqOptions.pageKey
@@ -242,7 +246,8 @@ export default Vue.extend({
                     keepSelectedOnPageChange: this.keepSelectedOnPageChange,
                     defaultPageSize: this.defaultPageSize,
                     staticData: this.staticData,
-                    otherServerData: this.otherServerData
+                    otherServerData: this.otherServerData,
+                    tag: this.listTag
                 },
                 on: {
                     'data-loaded': (response) => {

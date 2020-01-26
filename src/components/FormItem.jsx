@@ -11,12 +11,16 @@ export default Vue.extend({
 		error: function () {
 			if (!this.prop) return null
 			if (typeof this.prop === 'string') {
-				return helper.getProp(this.lqForm.formErrors, `${this.prop}.0`)
+				return helper.getProp(this.lqForm.formErrors, [this.prop, '0'])
 			} else {
-				const e = this.prop.map(p => {
-					return helper.getProp(this.lqForm.formErrors, `${p}.0`)
+				let errors = []
+				this.prop.forEach(p => {
+					let er = helper.getProp(this.lqForm.formErrors, [p])
+					if (er) {
+						errors =  errors.concat(er)
+					}
 				})
-				return e.length ? e[0] : null;
+				return errors.length ? errors[0] : null;
 			}
 		}
 	},

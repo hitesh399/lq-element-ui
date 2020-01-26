@@ -61,13 +61,13 @@ export default Input.extend({
                 update: this.onUpdate,
             }
         },
-        async onUpdate(data) {
-            this.lqEForm.busy = true;
+        onUpdate(data) {
+            // this.lqEForm.busy = true;
             this.mobileData = data
-            await this.$nextTick()
-            setTimeout(() => {
-                this.lqEForm.busy = false;
-            }, 1);
+            // await this.$nextTick()
+            // setTimeout(() => {
+            //     this.lqEForm.busy = false;
+            // }, 1);
         },
         formatter() {
             const { nationalNumber, countryCallingCode } = this.mobileData
