@@ -55,6 +55,7 @@ export default Input.extend({
             return this.groupBy ? this.renderOptionsWithGroup() : this.renderOptions(this.finalItems)
         },
         renderOptions(items) {
+            if (!(items && items.length)) return null
             return items.map(item => {
                 const _val = this.$helper.isObject(item) ? item[this.itemValue] : item
                 const _disabled = this.$helper.isObject(item) ? !!item.disabled : false
@@ -71,6 +72,7 @@ export default Input.extend({
             })
         },
         renderOptionsWithGroup() {
+             if (!(this.groups && this.groups.length)) return null
             return this.groups.map(group => {
                 const items = this.groupedOptions[group]
                 return this.$scopedSlots.groupItem ? this.$scopedSlots.groupItem({group, items}) : 
@@ -90,17 +92,19 @@ export default Input.extend({
             if (this.isNotSame(value, this.LQElement)) {
                 const _values = value ? (this.$helper.isArray(value) ? value : [value]) : []
                 let items = [];
-                _values.forEach((val) => {
-                    let _selected_item = val
-                    this.items.every(_item => {
-                        if (_item[this.itemValue] === val) {
-                            _selected_item = _item
-                            return false
-                        }
-                        return true
+                if (this.items && this.items.length) {
+                    _values.forEach((val) => {
+                        let _selected_item = val
+                        this.items.every(_item => {
+                            if (_item[this.itemValue] === val) {
+                                _selected_item = _item
+                                return false
+                            }
+                            return true
+                        })
+                        items.push(_selected_item)
                     })
-                    items.push(_selected_item)
-                })
+                }
                 this.setValue((items[0] !== undefined ? (this.multiple ? items : items[0]) : value), true, true)
             }
         },
