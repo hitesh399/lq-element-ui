@@ -46,11 +46,24 @@ const lqOptions = {
             if (!fileObject) return
             let outPut = fileObject.map(f => {
                 const primaryVal = f[this.primaryKey] ? f[this.primaryKey] : ''
-                return onlyPrimary ? primaryVal : {
+                if (onlyPrimary) {
+                    return primaryVal
+                }
+
+                if (this.sendThumbWithOriginal) {
+                    return {
+                        file: f.original ? f.original : '',
+                        thumbnails: f.file ? [{file: f.file}]: '',
+                        [this.primaryKey]: primaryVal
+                    }
+                }
+                return {
                     file: f.file ? f.file : '',
-                    [this.primaryKey]: primaryVal,
+                    [this.primaryKey]: primaryVal
                 }
             });
+
+
             return !this.multiple && outPut ? outPut[0] : outPut;
         },
         uploadFnc: async function () {

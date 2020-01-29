@@ -212,6 +212,10 @@ export default Vue.extend({
         shadow: {
             type: String,
             default: () => 'hover'
+        },
+        sendThumbWithOriginal: {
+            type: Boolean,
+            default: () => false
         }
     },
     data() {
@@ -476,7 +480,7 @@ export default Vue.extend({
         __formatter(fileObject) {
             let fnc = this.formatterFnc;
             if (typeof fnc === 'function') {
-                return fnc.call({ multiple: this.multiple, fileObject: fileObject, primaryKey: this.primaryKey })
+                return fnc.call({ multiple: this.multiple, fileObject: fileObject, primaryKey: this.primaryKey, sendThumbWithOriginal: this.sendThumbWithOriginal })
             } else {
                 throw Error('formatter function is Required.')
             }
