@@ -52,7 +52,8 @@ export default Vue.extend({
                     visible: this.dialog,
                     title: this.lqFile.popupTitle,
                     width: this.lqFile.popupWidth.toString() + 'px',
-                    closeOnClickModal: !this.lqFile.croppPopupPersistent
+                    closeOnClickModal: !this.lqFile.croppPopupPersistent,
+                    appendToBody: true
                 },
                 attrs: {
                     // width: 600

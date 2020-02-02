@@ -230,8 +230,8 @@ export default Vue.extend({
     },
     computed: {
         showAddBtn: function () {
-            if (!this.multiple && (!this.fileObject || !this.fileObject.id || !this.fileObject.uid)) {
-                return this.fileObject && (this.fileObject.id || this.fileObject.uid) ? false : true;
+            if (!this.multiple && (!this.fileObject || !this.fileObject[this.primaryKey] || !this.fileObject.uid)) {
+                return this.fileObject && (this.fileObject[this.primaryKey] || this.fileObject.uid) ? false : true;
             } else if (this.multiple && (!this.maxNoOfFiles || this.fileObject.length < this.maxNoOfFiles)) {
                 return true;
             } else {

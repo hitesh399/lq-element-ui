@@ -166,7 +166,7 @@ export default Vue.extend({
             return this.$createElement(
                 'div',
                 {},
-                [ this.lqFile.showThumbView && ( this.isImage || this.uploadedFileType === 'image') ? this.genImageItem() : this.genActionItem()]
+                [ this.lqFile.showThumbView && ( this.isImage || (!this.file && this.uploadedFileType === 'image')) ? this.genImageItem() : this.genActionItem()]
             )
         },
         genImageItem() {
