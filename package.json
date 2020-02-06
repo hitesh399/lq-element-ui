@@ -1,6 +1,6 @@
 {
   "name": "lq-element-ui-2",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "scripts": {
     "serve": "vue-cli-service serve src/dev/index.js",
     "build-bundle": "vue-cli-service build --target lib --name lq.element.ui src/main.js",
