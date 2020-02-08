@@ -36,7 +36,7 @@
     "jest-serializer-vue": "^2.0.2",
     "jsdom": "^15.2.1",
     "jsdom-global": "^3.0.2",
-    "lq-form": "^0.1.112",
+    "lq-form": "^0.1.116",
     "lq-v-file": "^0.1.42",
     "lq-vuetify": "^0.0.61",
     "mdi": "^2.2.43",

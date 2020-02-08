@@ -1,9 +1,9 @@
 <template>
     <div>
-       <!--  <lq-el-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
+        <lq-el-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
             <template v-slot="{model, submit}">
-                {{model}}
-                <lq-el-phone id="phone_no" placeholder="Test I am here a placeholder" size="sm" />
+               {{model}}
+                <!--  <lq-el-phone id="phone_no" placeholder="Test I am here a placeholder" size="sm" />
                 <lq-el-phone-or-text id="phone_no_email" placeholder="Email/Mobile No."/>
                 <lq-el-place id="place" :value="test_value" />
                 <lq-el-file id="_file" :thumb="{width:600, height: 600}" />
@@ -16,29 +16,32 @@
                     type="text"
                 >
                   <template v-slot:label>I am Label</template>
-                </lq-el-input> -->
-                <!--    <lq-el-input-number id="_number" @change="handleChangeNumber" :min="1" :max="10"></lq-el-input-number>Group Radio Button
+                </lq-el-input>
+              <lq-el-input-number id="_number" @change="handleChangeNumber" :min="1" :max="10"></lq-el-input-number>Group Radio Button
                 <lq-el-radio-group id="_radio">
                     <el-radio :label="3">Option A</el-radio>
                     <el-radio :label="6">Option B</el-radio>
                     <el-radio :label="9">Option C</el-radio>
                 </lq-el-radio-group>Single radio Button
                 <lq-el-radio :label="3" id="_single_radio_btn">Option A</lq-el-radio>
-                <lq-el-radio :label="4" id="_single_radio_btn">Option A</lq-el-radio>Group Checkbox
+                <lq-el-radio :label="4" id="_single_radio_btn">Option A</lq-el-radio> -->
+                
+                Group Checkbox
                 <lq-el-checkbox-group id="_checkList">
                     <el-checkbox label="Option A"></el-checkbox>
                     <el-checkbox label="Option B"></el-checkbox>
                     <el-checkbox label="Option C"></el-checkbox>
                     <el-checkbox label="disabled"></el-checkbox>
                     <el-checkbox label="selected and disabled"></el-checkbox>
-                </lq-el-checkbox-group>Single Checkbox
+                </lq-el-checkbox-group>
+                Single Checkbox
                 <lq-el-checkbox
-                    id="_single_checkbox"
+                    id="_single_checkbox.test.test1"
                     :true-label="1"
                     :false-label="0"
                     label="Option1"
                 />Switch
-                <lq-el-switch
+                <!-- <lq-el-switch
                     active-color="#13ce66"
                     inactive-color="#ff4949"
                     active-text="Pay by month"
@@ -125,11 +128,12 @@
                 <div class="block">
                     <span class="demonstration">With default value</span>
                     <lq-el-color-picker id="color1"></lq-el-color-picker>
-                </div>-->
-                <!-- <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button> -->
-      <!--       </template>
-        </lq-el-form> -->
-         <lq-list-filter name="_test_table">
+                </div> -->
+                <el-button type="submit" @click="(e) => {e.preventDefault(); submit()}">Submit</el-button>
+                <el-button type="submit" @click="(e) => {e.preventDefault(); init()}">INIT</el-button>
+           </template>
+        </lq-el-form>
+         <!-- <lq-list-filter name="_test_table">
             <template v-slot:default="props">qwdqw {{props.model.selected}}</template>
         </lq-list-filter>
         <lq-el-table
@@ -149,7 +153,7 @@
             <el-table-column prop="id" sortable="custom" label="id" width="180"></el-table-column>
             <el-table-column prop="first_name" label="First Name" sortable="custom" width="180"></el-table-column>
             <el-table-column prop="last_name" label="Last Name" width="180"></el-table-column>
-        </lq-el-table>
+        </lq-el-table>  -->
     </div>
 </template>
 <script>
@@ -220,6 +224,9 @@ export default {
     methods: {
         handleChangeNumber(value) {
             console.log('handleChangeNumber', value);
+        },
+        init() {
+            this.$lqForm.setElementVal('test_form', '_single_checkbox.test.test1', 1)
         }
     }
 };
