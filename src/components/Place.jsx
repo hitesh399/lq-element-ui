@@ -23,8 +23,26 @@ export default Input.extend({
     methods: {
         customEvents() {
             return {
-                placechanged: this.getAddressData
+                placechanged: this.getAddressData,
+                blur: this.onBlur
             }
+        },
+        onBlur(e) {
+            const elm = this.$el.querySelector('input[name="'+this.id+'"]')
+            const value = elm.value
+            const formatted_address = this.LQElement  ? this.LQElement.formatted_address : ''
+            if (!value) {
+                this.setValue(null, true, false, true)
+                return
+            }            
+            if (value !==  formatted_address) {
+                this.$nextTick(() => {
+                    if(value) {
+                       elm.value = formatted_address 
+                    }
+                })
+            }
+            this.validateIfEventMatch('blur')
         },
         getAddressData(addressData, placeResultData, id) {
             const { formatted_address, geometry, place_id } = placeResultData

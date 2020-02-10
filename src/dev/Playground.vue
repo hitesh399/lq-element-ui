@@ -2,6 +2,7 @@
     <div>
         <lq-el-form name="test_form" :rules="rules" ref="lqForm" action="http://localhost:8080">
             <template v-slot="{model, submit}">
+                <lq-el-place id="_place"  :clearable="true"/>
                {{model}}
                 <!--  <lq-el-phone id="phone_no" placeholder="Test I am here a placeholder" size="sm" />
                 <lq-el-phone-or-text id="phone_no_email" placeholder="Email/Mobile No."/>
@@ -26,7 +27,7 @@
                 <lq-el-radio :label="3" id="_single_radio_btn">Option A</lq-el-radio>
                 <lq-el-radio :label="4" id="_single_radio_btn">Option A</lq-el-radio> -->
                 
-                Group Checkbox
+                <!-- Group Checkbox
                 <lq-el-checkbox-group id="_checkList">
                     <el-checkbox label="Option A"></el-checkbox>
                     <el-checkbox label="Option B"></el-checkbox>
@@ -40,7 +41,7 @@
                     :true-label="1"
                     :false-label="0"
                     label="Option1"
-                />Switch
+                />Switch -->
                 <!-- <lq-el-switch
                     active-color="#13ce66"
                     inactive-color="#ff4949"

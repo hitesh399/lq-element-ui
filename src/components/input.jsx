@@ -72,7 +72,7 @@ export default DirectInput.extend({
             return {
                 placeholder: this.placeholder,
                 id: `${this.lqForm.name}.${this.id}`,
-               
+                name: this.id               
             }
         },
         onChange(value) {
