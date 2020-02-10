@@ -27,7 +27,7 @@ export default Input.extend({
                 blur: this.onBlur
             }
         },
-        onBlur(e) {
+        onBlur() {
             const elm = this.$el.querySelector('input[name="'+this.id+'"]')
             const value = elm.value
             const formatted_address = this.LQElement  ? this.LQElement.formatted_address : ''
