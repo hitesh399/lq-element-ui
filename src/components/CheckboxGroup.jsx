@@ -14,6 +14,16 @@ export default Input.extend({
                 ...this._defaultProps(),
                 value: this.LQElement ? this.LQElement : [],
             }
-        }
+        },
+        /**
+         * When value change internally.
+         * @param {any} value 
+         */
+        onInput(value) {
+            if (!this.touch) {
+                this.touchStatus(true);
+            }
+            Input.options.methods.onInput.call(this, value);
+        },
     }
 })

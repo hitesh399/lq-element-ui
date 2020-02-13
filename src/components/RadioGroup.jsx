@@ -6,5 +6,17 @@ export default Input.extend({
         return {
             tagName: 'el-radio-group'
         }
+    },
+    methods: {
+        /**
+         * When value change internally.
+         * @param {any} value 
+         */
+        onInput(value) {
+            if (!this.touch) {
+                this.touchStatus(true);
+            }
+            Input.options.methods.onInput.call(this, value);
+        }
     }
 })
