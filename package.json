@@ -40,7 +40,7 @@
     "lq-v-file": "^0.1.42",
     "lq-vuetify": "^0.0.61",
     "mdi": "^2.2.43",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "sinon": "^7.5.0",
